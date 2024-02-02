@@ -1,6 +1,47 @@
-//
-// For guidance on how to add CSS and SCSS see:
-// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
-// 
+.spinner {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border-width: 12px;
+  border-style: solid;
+  border-color: #DEE0E2;
+  border-top-color: #005EA5;
+  margin-bottom: govuk-spacing(3);
 
-// Add extra styles here
+  @media not (prefers-reduced-motion) {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  &__ready {
+    border-color: #005EA5;
+    -webkit-animation: none;
+    animation: none;
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.centre {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+}
+

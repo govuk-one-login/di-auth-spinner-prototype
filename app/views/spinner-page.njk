@@ -1,0 +1,21 @@
+{% extends "layouts/main.njk" %}
+
+{% block pageTitle %}
+    {{ serviceName }}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="govuk-heading-l">Everything works</h1>
+
+    <form class="form" action="relying-party" method="post">
+        <div id="spinner-container" data-api-route="/api"></div>
+    </form>
+
+{% endblock %}
+
+
+{% block pageScripts %}
+    <script src="/public/javascripts/spinner.js"></script>
+{% endblock %}
+
