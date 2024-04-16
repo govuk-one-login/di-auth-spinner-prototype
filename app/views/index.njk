@@ -18,10 +18,14 @@
             <p class="govuk-body-l">
                 This prototype includes scenarios a user may encounter when an asynchronous network request
                 determines if the processing necessary to continue to the next step in their journey has completed.</p>
-            <hr>
+            <p class="govuk-body-l">
+                It has been produced to support frontend development of the component by demonstrating component behaviour under different conditions.
+            </p>
 
-            <strong class="govuk-tag app-tag govuk-tag--red govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-                JS runs
+            <hr class="govuk-section-break govuk-section-break--visible">
+
+            <strong class="govuk-tag app-tag govuk-tag--yellow govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                JS doesn't run
             </strong>
 
             <h2 class="govuk-heading-m">JavaScript does not run</h2>
@@ -47,21 +51,25 @@
 
             <p class="govuk-body">
                 {{ govukButton({
-                    text: "See the page without JavaScript",
-                    href: "/spinner-page-javascript-does-not-run",
-                    isStartButton: false
+                    text: "See the page where JavaScript doesn't run",
+                    isStartButton: false,
+                    disabled: true,
+                    href: "/spinner-page-javascript-does-not-run"
                 }) }}
             </p>
+
+            <hr class="govuk-section-break govuk-section-break--visible">
 
             <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
                 JS runs
             </strong>
-            <strong class="govuk-tag app-tag govuk-tag--red govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-                JS runs quickly
+            <strong class="govuk-tag app-tag govuk-tag--yellow govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                JS runs slowly
             </strong>
 
+
             <h2 class="govuk-heading-m">JavaScript runs after a delay</h2>
-            <p class="govuk-body">In this scenario, JavaScript loads and runs, but happens 2 seconds after the
+            <p class="govuk-body">In this scenario, JavaScript loads and runs, but the load is slow. This page simulates the execution happening 2 seconds after the
                 page has loaded.</p>
 
             {% from "govuk/components/button/macro.njk" import govukButton %}
@@ -74,6 +82,8 @@
                 }) }}
             </p>
 
+            <hr class="govuk-section-break govuk-section-break--visible">
+
             <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
                 JS runs
             </strong>
@@ -81,23 +91,23 @@
                 JS runs quickly
             </strong>
             <strong class="govuk-tag app-tag govuk-tag--red govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-                Server responds
+                No response
             </strong>
 
             <h2 class="govuk-heading-m">Server doesn't respond</h2>
             <p class="govuk-body">In this scenario, the server does not respond to the asynchronous JavaScript
-                request.</p>
+                request to check if processing is complete.</p>
 
             {% from "govuk/components/button/macro.njk" import govukButton %}
 
             <p class="govuk-body">
                 {{ govukButton({
-                    text: "See the page with the server sending no response",
-                    href: "/spinner-page-no-response",
-                    isStartButton: false
+                    text: "To be confirmed",
+                    disabled: true
                 }) }}
             </p>
 
+            <hr class="govuk-section-break govuk-section-break--visible">
 
             <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
                 JS runs
@@ -109,10 +119,37 @@
                 Server responds
             </strong>
             <strong class="govuk-tag app-tag govuk-tag--red govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-                Can proceed
+                Error response
             </strong>
 
-            <h2 class="govuk-heading-m">Server never finishes processing</h2>
+            <h2 class="govuk-heading-m">Server responds with an error</h2>
+            <p class="govuk-body">In this scenario, the user cannot proceed because the server has responded with an error.</p>
+
+            {% from "govuk/components/button/macro.njk" import govukButton %}
+
+            <p class="govuk-body">
+                {{ govukButton({
+                    text: "Under construction",
+                    disabled: true
+                }) }}
+            </p>
+
+            <hr class="govuk-section-break govuk-section-break--visible">
+
+            <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                JS runs
+            </strong>
+            <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                JS runs quickly
+            </strong>
+            <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                Server responds
+            </strong>
+            <strong class="govuk-tag app-tag govuk-tag--red govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                Processing endless
+            </strong>
+
+            <h2 class="govuk-heading-m">Server processing doesn't complete</h2>
             <p class="govuk-body">In this scenario, the user cannot proceed because server continually responds
                 with the same message: the processing is not complete.</p>
 
@@ -120,12 +157,13 @@
 
             <p class="govuk-body">
                 {{ govukButton({
-                    text: "See the page with the user cannot proceed",
-                    href: "/spinner-page-cannot-proceed",
-                    isStartButton: false
+                    text: "To be confirmed",
+                    isStartButton: false,
+                    disabled: true
                 }) }}
             </p>
 
+            <hr class="govuk-section-break govuk-section-break--visible">
 
             <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
                 JS runs
@@ -139,11 +177,11 @@
             <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
                 Can proceed
             </strong>
-            <strong class="govuk-tag app-tag govuk-tag--red govuk-!-margin-bottom-4 govuk-!-margin-top-4">
-                Short wait
+            <strong class="govuk-tag app-tag govuk-tag--yellow govuk-!-margin-bottom-4 govuk-!-margin-top-4">
+                Long wait
             </strong>
 
-            <h2 class="govuk-heading-m">Server responds after 10 seconds</h2>
+            <h2 class="govuk-heading-m">Server processing takes around 10 seconds</h2>
             <p class="govuk-body">In this scenario, the user has to wait 10 seconds for the processing necessary for
                 them to continue to complete.</p>
 
@@ -151,12 +189,13 @@
 
             <p class="govuk-body">
                 {{ govukButton({
-                    text: "See the page with the user cannot proceed",
-                    href: "/spinner-page-slow-processing",
+                    text: "See the page with a 10 second wait",
+                    href: "/spinner-page-processing-slow",
                     isStartButton: false
                 }) }}
             </p>
 
+            <hr class="govuk-section-break govuk-section-break--visible">
 
             <strong class="govuk-tag app-tag govuk-tag--green govuk-!-margin-bottom-4 govuk-!-margin-top-4">
                 JS runs
@@ -174,7 +213,7 @@
                 Short wait
             </strong>
 
-            <h2 class="govuk-heading-m">Server responds after 2 seconds</h2>
+            <h2 class="govuk-heading-m">Server processing takes around 2 seconds</h2>
             <p class="govuk-body">In this scenario, the user has to wait 2 seconds for the processing necessary for them
                 to continue to complete.</p>
 
@@ -182,8 +221,8 @@
 
             <p class="govuk-body">
                 {{ govukButton({
-                    text: "See the page with the user cannot proceed",
-                    href: "/spinner-page",
+                    text: "See the page with a 2 second wait",
+                    href: "/spinner-page-processing-quick",
                     isStartButton: false
                 }) }}
             </p>

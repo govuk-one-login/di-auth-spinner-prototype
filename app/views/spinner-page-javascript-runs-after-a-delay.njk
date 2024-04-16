@@ -6,11 +6,7 @@
 
 {% block content %}
 
-    <h1 class="govuk-heading-l">JavaScript runs after a delay</h1>
-
-    <form class="form" action="relying-party" method="post">
-        <div id="spinner-container" data-api-route="api"></div>
-    </form>
+    {% include "includes/_shared-content.njk" %}
 
 {% endblock %}
 
@@ -18,8 +14,8 @@
 {% block pageScripts %}
 
     <script>
-        let injectScript = function () {
-            let scriptTag = document.createElement('script');
+        const injectScript = function () {
+            const scriptTag = document.createElement('script');
             scriptTag.setAttribute('src', '/public/javascripts/spinner.js');
             document.body.appendChild(scriptTag);
         }

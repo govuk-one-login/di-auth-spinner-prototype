@@ -1,4 +1,5 @@
 const state = {
+    heading: "Returning you to [service]",
     spinnerStateText: "Please wait",
     messageText: "There may be a short wait. You'll be able to continue soon.",
     spinnerState: "pending",
@@ -9,6 +10,11 @@ const state = {
 
 function createVirtualDom() {
     return [
+        {
+            nodeName: "h1",
+            text: state.heading,
+            classes: ["govuk-heading-l"]
+        },
         {
             nodeName: "div",
             id: "spinner",

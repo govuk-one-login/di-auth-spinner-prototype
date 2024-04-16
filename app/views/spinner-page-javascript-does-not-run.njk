@@ -6,11 +6,24 @@
 
 {% block content %}
 
-    <h1 class="govuk-heading-l">JavaScript does not run</h1>
+    {% include "includes/_shared-content.njk" %}
 
-    <form class="form" action="relying-party" method="post">
-        <div id="spinner-container" data-api-route="api"></div>
-    </form>
+{% endblock %}
+
+
+{% block pageScripts %}
+
+    <script>
+        try {
+            failToRunJavaScript()
+        } catch(error) {
+            console.error(error)
+        }
+
+        function failToRunJavaScript() {
+            throw new Error("Something went wrong, preventing JavaScript from running");
+        }
+    </script>
 
 {% endblock %}
 

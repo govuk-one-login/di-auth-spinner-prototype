@@ -4,13 +4,11 @@
     {{ serviceName }}
 {% endblock %}
 
+{% set processingTime = 2 %}
+
 {% block content %}
 
-    <h1 class="govuk-heading-l">Everything works</h1>
-
-    <form class="form" action="relying-party" method="post">
-        <div id="spinner-container" data-api-route="/api"></div>
-    </form>
+    {% include "includes/_shared-content.njk" %}
 
 {% endblock %}
 

@@ -10,9 +10,9 @@ let counter = 0;
 router.get("/api", (req, res) => {
     setTimeout(() => {
         counter++;
-        console.log(`Counter is ${counter}`);
-        const delay = req.query.delay || 1;
-        if (counter >= delay) {
+        console.log(`Elapsed processing seconds: ${counter}`);
+        const processingTime = req.query.processingTime || 1;
+        if (counter >= processingTime) {
             res.json({ status: "Clear to proceed", counter: counter });
             counter = 0;
         } else {
@@ -27,6 +27,6 @@ router.get("/api-cannot-proceed", (req, res) => {
     }, 1000)
 })
 
-router.get("/api-no-response", (req, res) => {
-    return;
+router.post("/proceed-to-relying-party", (req, res) => {
+    res.render("spinner-page-javascript-does-not-run.njk")
 })
