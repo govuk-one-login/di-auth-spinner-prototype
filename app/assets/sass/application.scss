@@ -20,6 +20,14 @@
   }
 }
 
+.spinner-container {
+  &__error {
+    .spinner, .spinner-state-text {
+      display: none;
+    }
+  }
+}
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);

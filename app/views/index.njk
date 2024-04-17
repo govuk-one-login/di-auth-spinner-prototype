@@ -123,14 +123,14 @@
             </strong>
 
             <h2 class="govuk-heading-m">Server responds with an error</h2>
-            <p class="govuk-body">In this scenario, the user cannot proceed because the server has responded with an error.</p>
+            <p class="govuk-body">In this scenario, the user cannot proceed because the server has responded to the asynchronous JavaScript request with an error.</p>
 
             {% from "govuk/components/button/macro.njk" import govukButton %}
 
             <p class="govuk-body">
                 {{ govukButton({
-                    text: "Under construction",
-                    disabled: true
+                    text: "See the page where there's been an error",
+                    href: "/spinner-page-server-responds-with-error.njk"
                 }) }}
             </p>
 

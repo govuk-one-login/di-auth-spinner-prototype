@@ -27,6 +27,10 @@ router.get("/api-cannot-proceed", (req, res) => {
     }, 1000)
 })
 
+router.get("/api-error-response", (req, res) => {
+    throw new Error('There has been an error');
+})
+
 router.post("/proceed-to-relying-party", (req, res) => {
     res.render("spinner-page-javascript-does-not-run.njk")
 })

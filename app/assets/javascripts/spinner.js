@@ -9,7 +9,8 @@ const state = {
 };
 
 function createVirtualDom() {
-    return [
+
+    const initialState = [
         {
             nodeName: "h1",
             text: state.heading,
@@ -23,7 +24,7 @@ function createVirtualDom() {
         {
             nodeName: "p",
             text: state.spinnerStateText,
-            classes: ["centre"]
+            classes: ["centre", "spinner-state-text"]
         },
         {
             nodeName: "p",
@@ -37,13 +38,45 @@ function createVirtualDom() {
             classes: ["govuk-button", "govuk-!-margin-top-4"]
         },
     ];
+
+    const errorState = [
+        {
+            nodeName: "h1",
+            text: state.heading,
+            classes: ["govuk-heading-l"]
+        },
+        {
+            nodeName: "p",
+            text: state.messageText,
+            classes: ["govuk-body"]
+        },
+        {
+            nodeName: "h2",
+            text: "What you can do",
+            classes: ["govuk-heading-m"]
+        },
+        {
+            nodeName: "p",
+            innerHTML: `Go back to the service you were trying to use. You can look for the service using your search engine or find it from the <a href="https://www.gov.uk">GOV.UK homepage</a>.`,
+            classes: ["govuk-body"]
+        },
+    ]
+
+    return state.error ? errorState : initialState;
 }
 
 function updateDom() {
+    document.title = state.heading;
     state.virtualDom = createVirtualDom();
     const elements = state.virtualDom.map(convert);
-    document.getElementById("spinner-container").replaceChildren(...elements);
-    if(state.done) {
+    const container = document.getElementById("spinner-container")
+    container.replaceChildren(...elements);
+
+    if (state.error) {
+        container.classList.add('spinner-container__error');
+    }
+
+    if (state.done) {
         clearInterval(domUpdate);
     }
 }
@@ -51,6 +84,7 @@ function updateDom() {
 function convert(node) {
     const el = document.createElement(node.nodeName);
     if (node.text) el.textContent = node.text;
+    if (node.innerHTML) el.innerHTML = node.innerHTML;
     if (node.id) el.id = node.id;
     if (node.classes) el.classList.add(...node.classes);
     if (node.buttonDisabled) el.setAttribute("disabled", node.buttonDisabled);
@@ -63,29 +97,47 @@ setTimeout(() => {
     }
 }, 5000);
 
-async function requestReadyState() {
+function reflectCompletion() {
+    state.spinnerState = "spinner__ready";
+    state.spinnerStateText = "Completed";
+    state.buttonDisabled = false;
+    state.done = true;
+}
+
+function reflectError() {
+    state.heading = "Sorry, there is a problem"
+    state.messageText = "We cannot return you to the service at the moment."
+    state.spinnerState = "spinner__failed"
+    state.done = true;
+    state.error = true;
+}
+
+async function requestIDProcessingStatus() {
 
     const apiRoute = document.getElementById('spinner-container').dataset.apiRoute;
 
     try {
         const response = await fetch(apiRoute);
+
+        if(response.status !== 200) {
+            throw new Error(`Status code ${response.status} received`)
+        }
+
         const data = await response.json();
-        console.log(data);
+
         if (data.status === "Clear to proceed") {
-            state.spinnerState = "spinner__ready";
-            state.spinnerStateText = "Completed";
-            state.buttonDisabled = false;
-            state.done = true;
+            reflectCompletion();
         } else {
-            await requestReadyState();
+            await requestIDProcessingStatus();
         }
     } catch (e) {
         console.log(e);
+        reflectError();
     }
 }
 
 updateDom();
 
-setTimeout(requestReadyState, 200);
+setTimeout(requestIDProcessingStatus, 200);
 
 const domUpdate = setInterval(updateDom, 2000);
