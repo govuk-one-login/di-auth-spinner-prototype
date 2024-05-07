@@ -12,6 +12,10 @@
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
   }
+  
+  @media (prefers-reduced-motion) {
+    transform: rotate(0.125turn);
+  }
 
   &__ready {
     border-color: #005EA5;
