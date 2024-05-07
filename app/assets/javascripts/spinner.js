@@ -1,7 +1,7 @@
 const state = {
     heading: "Returning you to [service]",
-    spinnerStateText: "Please wait",
-    messageText: "There may be a short wait. You'll be able to continue soon.",
+    spinnerStateText: "Wait to be returned to the service",
+    messageText: "There may be a short delay. You'll be able to continue to the service soon.",
     spinnerState: "pending",
     buttonDisabled: true,
     done: false,
@@ -93,13 +93,13 @@ function convert(node) {
 
 setTimeout(() => {
     if (state.spinnerState !== "ready") {
-        state.spinnerStateText = "We're still trying";
+        state.spinnerStateText = "We're still trying to return you to the service";
     }
 }, 5000);
 
 function reflectCompletion() {
     state.spinnerState = "spinner__ready";
-    state.spinnerStateText = "Completed";
+    state.spinnerStateText = "You can now continue to the service";
     state.buttonDisabled = false;
     state.done = true;
 }
