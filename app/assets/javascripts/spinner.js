@@ -1,7 +1,6 @@
 const state = {
     heading: "Returning you to [service]",
     spinnerStateText: "Wait to be returned to the service",
-    messageText: "There may be a short delay. You'll be able to continue to the service soon.",
     spinnerState: "pending",
     buttonDisabled: true,
     done: false,
@@ -25,11 +24,6 @@ function createVirtualDom() {
             nodeName: "p",
             text: state.spinnerStateText,
             classes: ["centre", "spinner-state-text"]
-        },
-        {
-            nodeName: "p",
-            text: state.messageText,
-            classes: ["govuk-body"]
         },
         {
             nodeName: "button",
