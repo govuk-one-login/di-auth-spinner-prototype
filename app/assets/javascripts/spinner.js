@@ -113,7 +113,7 @@ async function requestIDProcessingStatus() {
     try {
         const response = await fetch(apiRoute);
 
-        if(response.status !== 200) {
+        if (response.status !== 200) {
             throw new Error(`Status code ${response.status} received`)
         }
 
@@ -122,7 +122,9 @@ async function requestIDProcessingStatus() {
         if (data.status === "Clear to proceed") {
             reflectCompletion();
         } else {
-            await requestIDProcessingStatus();
+            setTimeout(async function() {
+                await requestIDProcessingStatus();
+            }, 1000)
         }
     } catch (e) {
         console.log(e);

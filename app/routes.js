@@ -8,22 +8,20 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 let counter = 0;
 router.get("/api", (req, res) => {
-    setTimeout(() => {
-        counter++;
-        console.log(`Elapsed processing seconds: ${counter}`);
-        const processingTime = req.query.processingTime || 1;
-        if (counter >= processingTime) {
-            res.json({ status: "Clear to proceed", counter: counter });
-            counter = 0;
-        } else {
-            res.json({ status: "Still processing", counter: counter });
-        }
-    }, 1000);
+    counter++;
+    const processingTime = req.query.processingTime || 1;
+    console.log(`Elapsed processing seconds: ${counter}. Processing time limit is: ${processingTime}`);
+    if (counter >= processingTime) {
+        res.json({status: "Clear to proceed", counter: counter});
+        counter = 0;
+    } else {
+        res.json({status: "Still processing", counter: counter});
+    }
 })
 
 router.get("/api-cannot-proceed", (req, res) => {
     setTimeout(() => {
-        res.json({ status: "Still processing" })
+        res.json({status: "Still processing"})
     }, 1000)
 })
 
