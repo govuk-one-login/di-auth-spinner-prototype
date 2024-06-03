@@ -1,0 +1,19 @@
+{% extends "layouts/main.njk" %}
+
+{% block pageTitle %}
+    {{ serviceName }}
+{% endblock %}
+
+{% set url = "/api?processingTime=999" %}
+
+{% block content %}
+
+    {% include "includes/_shared-content.njk" %}
+
+{% endblock %}
+
+
+{% block pageScripts %}
+    <script src="/public/javascripts/spinner.js"></script>
+{% endblock %}
+

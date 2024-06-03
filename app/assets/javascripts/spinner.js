@@ -94,7 +94,6 @@ const WaitInteractions = (() => {
         state.error = true;
     };
 
-
     const convert = node => {
         const el = document.createElement(node.nodeName);
         if (node.text) el.textContent = node.text;
@@ -103,6 +102,10 @@ const WaitInteractions = (() => {
         if (node.classes) el.classList.add(...node.classes);
         if (node.buttonDisabled) el.setAttribute("disabled", node.buttonDisabled);
         return el;
+    };
+
+    const notInErrorOrDoneState = () => {
+        return !(state.done || state.error);
     }
 
     const requestIDProcessingStatus = async () => {
@@ -121,9 +124,11 @@ const WaitInteractions = (() => {
             if (data.status === "Clear to proceed") {
                 reflectCompletion();
             } else {
-                setTimeout(async () => {
-                    await requestIDProcessingStatus();
-                }, 1000)
+                if (notInErrorOrDoneState()) {
+                    setTimeout(async () => {
+                        await requestIDProcessingStatus();
+                    }, 1000)
+                }
             }
         } catch (e) {
             console.log(e);
@@ -145,6 +150,7 @@ const WaitInteractions = (() => {
             timers.abortUnresponsiveRequest = setTimeout(() => {
                 reflectError();
             }, 15000)
+
 
             updateDom();
 
