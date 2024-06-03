@@ -25,6 +25,10 @@ router.get("/api-cannot-proceed", (req, res) => {
     }, 1000)
 })
 
+router.get('/api-unresponsive', (req, res) => {
+// Server doesn't respond
+})
+
 router.get("/api-error-response", (req, res) => {
     throw new Error('There has been an error');
 })
