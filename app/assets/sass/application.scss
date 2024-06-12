@@ -8,6 +8,12 @@
   border-top-color: #005EA5;
   margin-bottom: govuk-spacing(3);
 
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+    border-top-color: transparent!important;
+  }
+
   @media not (prefers-reduced-motion) {
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
