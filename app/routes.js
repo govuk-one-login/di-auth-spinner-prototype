@@ -19,6 +19,19 @@ router.get("/api", (req, res) => {
     }
 })
 
+router.get("/prove-identity-status", (req, res) => {
+    counter++;
+    const processingTime = 3;
+    const status = req.query.status || "COMPLETED";
+    console.log(`Elapsed processing seconds: ${counter}. Processing time limit is: ${processingTime}`);
+    if (counter >= processingTime) {
+        res.json({status: status, counter: counter});
+        counter = 0;
+    } else {
+        res.json({status: "PROCESSING", counter: counter});
+    }
+})
+
 router.get("/api-cannot-proceed", (req, res) => {
     setTimeout(() => {
         res.json({status: "Still processing"})
