@@ -19,6 +19,43 @@ router.get("/api", (req, res) => {
     }
 })
 
+router.get("/prove-identity-status", (req, res) => {
+    counter++;
+    const processingTime = 3;
+    console.log(`Elapsed processing seconds: ${counter}. Processing time limit is: ${processingTime}`);
+    if (counter >= processingTime) {
+        res.json({status: "COMPLETED", counter: counter});
+        counter = 0;
+    } else {
+        res.json({status: "PROCESSING", counter: counter});
+    }
+})
+
+router.get("/prove-identity-status-intervention", (req, res) => {
+    counter++;
+    const processingTime = 3;
+    console.log(`Elapsed processing seconds: ${counter}. Processing time limit is: ${processingTime}`);
+    if (counter >= processingTime) {
+        res.json({status: "INTERVENTION", counter: counter});
+        counter = 0;
+    } else {
+        res.json({status: "PROCESSING", counter: counter});
+    }
+})
+
+
+router.get("/prove-identity-status-error", (req, res) => {
+    counter++;
+    const processingTime = 3;
+    console.log(`Elapsed processing seconds: ${counter}. Processing time limit is: ${processingTime}`);
+    if (counter >= processingTime) {
+        res.json({status: "ERROR", counter: counter});
+        counter = 0;
+    } else {
+        res.json({status: "PROCESSING", counter: counter});
+    }
+})
+
 router.get("/api-cannot-proceed", (req, res) => {
     setTimeout(() => {
         res.json({status: "Still processing"})
