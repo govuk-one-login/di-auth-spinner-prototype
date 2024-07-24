@@ -1,0 +1,45 @@
+{% extends "layouts/main.njk" %}
+
+{% block pageTitle %}
+    {{ serviceName }}
+{% endblock %}
+
+{% set url = "/api" %}
+
+{% block content %}
+
+    <div id="spinner-container"
+         data-initial-heading="Initial heading text"
+         data-initial-spinnerStateText="Initial spinner state text"
+         data-initial-spinnerState="pending"
+         data-error-heading="Error heading"
+         data-error-messageText="Error message text"
+         data-error-whatYouCanDo-heading="Error what you can do heading"
+         data-error-whatYouCanDo-message-text1="Error what you can do message text1"
+         data-error-whatYouCanDo-message-link-href="Error what you can do message link href"
+         data-error-whatYouCanDo-message-link-text="Error what you can do message link text"
+         data-error-whatYouCanDo-message-text2="Error what you can do message link text2"
+         data-complete-spinnerState="complete"
+         data-longWait-spinnerStateText="Long wait spinner state">
+
+
+        <h1 class="govuk-heading-l">There is a delay returning you to the service</h1>
+
+        <p class="govuk-body">Try to continue to the service again</p>
+
+        <form class="form" action="proceed-to-relying-party" method="post">
+            <input class="govuk-button govuk-!-margin-top-4" type="submit" value="Continue to the service">
+        </form>
+
+
+    </div>
+
+{% endblock %}
+
+
+{% block pageScripts %}
+
+
+
+{% endblock %}
+
